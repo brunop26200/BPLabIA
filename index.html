@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPLabIA - JUMESEN | Surveillance Prédictive en Santé</title>
+    <meta name="description" content="BPLabIA développe JUMESEN, une solution d'IA prédictive pour réduire les réhospitalisations grâce à un jumeau numérique et une architecture multi-agents.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #4fc3f7;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 12rem 2rem 6rem;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #4fc3f7;
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #29b6f6;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #4fc3f7;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(79, 195, 247, 0.1);
+        }
+
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: #1e3c72;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #666;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #4fc3f7;
+            margin-bottom: 1rem;
+        }
+
+        .architecture-section {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .architecture-diagram {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .architecture-diagram img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .partners {
+            background: #f0f8ff;
+            padding: 4rem 2rem;
+        }
+
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .partner-logo {
+            height: 60px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .partner-logo:hover {
+            opacity: 1;
+        }
+
+        .contact {
+            background: #f0f8ff;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e3c72;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+        }
+
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #4fc3f7;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- En-tête avec votre logo -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://mistralaichatupprodswe.blob.core.windows.net/chat-images/ca/8b/54/ca8b5400-8ace-4c5b-8d64-1ab341f70676/27a91f9b-8b47-4e79-a17d-cf42ba0fa345/591bbbfd-9440-42c4-8bcc-71a3c139f386?sv=2025-01-05&st=2026-02-28T14%3A48%3A08Z&se=2026-02-28T15%3A48%3A08Z&sr=b&sp=r&sig=FuGLdEZvcF6MtbeL1kfL5p%2BooD2cdWPqsOLW6ZKO3Cs%3D" alt="Logo BPLabIA">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#projet">Projet JUMESEN</a></li>
+                    <li><a href="#technologie">Technologie</a></li>
+                    <li><a href="#partenariats">Partenariats</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Hero -->
+    <section class="hero" id="accueil">
+        <h1>JUMESEN : La surveillance prédictive pour réduire les réhospitalisations</h1>
+        <p>Une solution innovante combinant un <strong>jumeau numérique évolutif</strong> et une <strong>architecture multi-agents</strong> pour détecter les dégradations de santé jusqu'à 120 minutes avant leur survenue.</p>
+        <a href="#contact" class="btn">Nous contacter</a>
+        <a href="#projet" class="btn btn-secondary">Découvrir le projet</a>
+    </section>
+
+    <!-- Section Projet -->
+    <section id="projet">
+        <h2 class="section-title">Le Projet JUMESEN</h2>
+        <p class="section-subtitle">Une solution d'IA prédictive pour transformer la surveillance des patients chroniques et périopératoires.</p>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Détection Précoce</h3>
+                <p>Identifie les dégradations de santé (ex. : hypoglycémie, instabilité hémodynamique) <strong>120 minutes avant les méthodes traditionnelles</strong>.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Architecture Multi-Agents</h3>
+                <p>8 agents IA spécialisés pour une analyse dynamique et adaptative des données physiologiques et biologiques.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Sécurité et Conformité</h3>
+                <p>Conforme au RGPD et aux normes médicales (ex. : ISO 13485), avec un hébergement des données en France.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Technologie avec schéma d'architecture -->
+    <section class="architecture-section" id="technologie">
+        <h2 class="section-title">Notre Technologie</h2>
+        <p class="section-subtitle">Une approche unique combinant un jumeau numérique et une architecture multi-agents pour une surveillance prédictive optimisée.</p>
+
+        <!-- Schéma d'architecture générale de JUMESEN -->
+        <div class="architecture-diagram">
+            <img src="https://mistralaichatupprodswe.blob.core.windows.net/chat-images/ca/8b/54/ca8b5400-8ace-4c5b-8d64-1ab341f70676/27a91f9b-8b47-4e79-a17d-cf42ba0fa345/06545239-a3de-49e0-a302-fe0e87a010ec?sv=2025-01-05&st=2026-02-28T15%3A18%3A12Z&se=2026-02-28T16%3A18%3A12Z&sr=b&sp=r&sig=IS1ZnKUuFHrlRU6K5Ta3xFV1tZ2Ba5QwP7lOF%2Faew6E%3D" alt="Architecture générale de JUMESEN">
+            <p style="margin-top: 1rem; font-style: italic; color: #666;">Schéma de l'architecture générale de JUMESEN : Intégration des données physiologiques et biologiques pour une interprétation prédictive par IA.</p>
+        </div>
+
+        <!-- Innovations clés -->
+        <div style="margin-top: 3rem;">
+            <h3 style="color: #1e3c72; margin-bottom: 1rem;">Innovations Clés</h3>
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                    <i class="fas fa-check-circle" style="color: #4fc3f7; margin-right: 1rem; margin-top: 0.2rem;"></i>
+                    <span><strong>Détection 4 fois plus rapide</strong> : 120 minutes avant vs. 30 minutes pour les méthodes traditionnelles (ex. : ARIMA).</span>
+                </li>
+                <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                    <i class="fas fa-check-circle" style="color: #4fc3f7; margin-right: 1rem; margin-top: 0.2rem;"></i>
+                    <span><strong>Analyse dynamique</strong> : Seuils constants et évolutions temporelles pour une interprétation précise.</span>
+                </li>
+                <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                    <i class="fas fa-check-circle" style="color: #4fc3f7; margin-right: 1rem; margin-top: 0.2rem;"></i>
+                    <span><strong>Agent "Explorateur"</strong> : Intègre des données émergentes (ex. : nouveaux biomarqueurs) pour une adaptabilité continue.</span>
+                </li>
+                <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                    <i class="fas fa-check-circle" style="color: #4fc3f7; margin-right: 1rem; margin-top: 0.2rem;"></i>
+                    <span><strong>Résultats actionnables</strong> : Diagnostic, pronostic et pistes thérapeutiques à disposition des professionnels de santé.</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section Bénéfices -->
+    <section style="background: white; padding: 4rem 2rem;">
+        <h2 class="section-title">Bénéfices pour les Professionnels de Santé</h2>
+        <p class="section-subtitle">JUMESEN améliore la prise en charge des patients et optimise le travail des équipes médicales.</p>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hospital-user"></i>
+                </div>
+                <h3>Réduction des Réhospitalisations</h3>
+                <p>Jusqu'à <strong>20 % de réduction</strong> grâce à une détection précoce des complications.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Optimisation des Ressources</h3>
+                <p>Moins de faux positifs (<strong>35 % de réduction</strong>) et une meilleure allocation des équipes.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-medical"></i>
+                </div>
+                <h3>Intégration aux Dossiers Patients</h3>
+                <p>Compatibilité avec les <strong>dossiers patients électroniques (DPE)</strong> existants.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Partenariats -->
+    <section class="partners" id="partenariats">
+        <h2 class="section-title">Devenez Partenaire</h2>
+        <p class="section-subtitle">Rejoignez notre consortium pour valider JUMESEN en conditions réelles et contribuer à une avancée majeure en santé prédictive.</p>
+
+        <div style="text-align: center; margin: 2rem 0;">
+            <h3 style="color: #1e3c72; margin-bottom: 1rem;">Ils nous font confiance</h3>
+            <div class="partner-logos">
+                <img src="https://via.placeholder.com/150x60/ffffff/1e3c72?text=Bpifrance" alt="Bpifrance" class="partner-logo">
+                <img src="https://via.placeholder.com/150x60/ffffff/1e3c72?text=Ramsay+Santé" alt="Ramsay Santé" class="partner-logo">
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <h3 style="color: #1e3c72; margin-bottom: 1rem;">Pourquoi nous rejoindre ?</h3>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Impact Clinique</h3>
+                    <p>Réduisez les complications et améliorez la qualité des soins pour vos patients.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Publications Scientifiques</h3>
+                    <p>Co-publiez les résultats dans des revues médicales de premier plan.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <h3>Optimisation des Coûts</h3>
+                    <p>Diminuez les coûts liés aux réhospitalisations et aux complications évitables.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contactez-Nous</h2>
+        <p class="section-subtitle">Intéressé par un partenariat ou une démonstration ? Écrivez-nous !</p>
+
+        <div class="contact-form">
+            <form action="https://formspree.io/f/mzbnqkzo" method="POST">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="institution">Établissement</label>
+                    <input type="text" id="institution" name="institution" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Envoyer</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-links">
+            <a href="#accueil">Accueil</a>
+            <a href="#projet">Projet</a>
+            <a href="#technologie">Technologie</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-researchgate"></i></a>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">© 2024 BPLabIA. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Script pour le défilement fluide -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
