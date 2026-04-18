@@ -693,6 +693,73 @@
             to { left: calc(92% - 16px); }
         }
 
+        .conferences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .conference-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e6eef8;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left;
+        }
+
+        .conference-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .conference-year {
+            display: inline-block;
+            background: #eaf4ff;
+            color: #1e3c72;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 999px;
+            padding: 0.35rem 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .conference-card h4 {
+            color: #1e3c72;
+            margin-bottom: 0.6rem;
+            font-size: 1.05rem;
+            line-height: 1.4;
+        }
+
+        .conference-location {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .conference-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2a5298;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .conference-link:hover {
+            color: #4fc3f7;
+        }
+
+        .scientific-highlight {
+            max-width: 850px;
+            margin: 0 auto 1.5rem;
+            text-align: center;
+            color: #4a4a4a;
+            font-size: 1.02rem;
+        }
+
         @media (max-width: 900px) {
             .agents-middle-row {
                 grid-template-columns: 1fr 1fr;
@@ -993,10 +1060,65 @@
         <p class="section-subtitle">Rejoignez notre consortium pour valider JUMESEN en conditions réelles et contribuer à une avancée majeure en santé prédictive.</p>
 
         <div style="text-align: center; margin: 2rem 0;">
+            <h3 style="color: #1e3c72; margin-bottom: 1rem;">Communications scientifiques</h3>
+            <p class="scientific-highlight">
+                Les travaux à l’origine de JUMESEN ont été présentés dans plusieurs conférences francophones en intelligence artificielle,
+                systèmes multi-agents et IA appliquée à la santé.
+            </p>
+
+            <!--
             <h3 style="color: #1e3c72; margin-bottom: 1rem;">Ils nous font confiance</h3>
             <div class="partner-logos">
                 <img src="https://github.com/brunop26200/BPLabIA/blob/main/logo-bpi-france.png?raw=true" alt="Bpifrance" class="partner-logo">
                 <img src="https://github.com/brunop26200/BPLabIA/blob/main/logo-ramsay-sante-inov.jpeg?raw=true" alt="Ramsay Santé Innovation" class="partner-logo">
+            </div>
+            -->
+
+            <div class="conferences-grid">
+                <div class="conference-card">
+                    <span class="conference-year">2019</span>
+                    <h4>Journée Francophone sur les Systèmes Multi-Agents (JFSMA)</h4>
+                    <p class="conference-location">Toulouse, France</p>
+                    <a class="conference-link" href="https://www.irit.fr/pfia2019/jfsma/" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Voir la conférence
+                    </a>
+                </div>
+
+                <div class="conference-card">
+                    <span class="conference-year">2022</span>
+                    <h4>Journée Francophone sur les Systèmes Multi-Agents (JFSMA)</h4>
+                    <p class="conference-location">Saint-Étienne, France</p>
+                    <a class="conference-link" href="https://ci.mines-stetienne.fr/pfia2022/conferences/jfsma/" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Voir la conférence
+                    </a>
+                </div>
+
+                <div class="conference-card">
+                    <span class="conference-year">2024</span>
+                    <h4>Santé et IA</h4>
+                    <p class="conference-location">La Rochelle, France</p>
+                    <a class="conference-link" href="https://afia.asso.fr/les-journees-communes/sante-et-ia-2024/" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Voir la conférence
+                    </a>
+                </div>
+
+                <div class="conference-card">
+                    <span class="conference-year">2025</span>
+                    <h4>Application Pratique de l’IA (APIA)</h4>
+                    <p class="conference-location">Dijon, France</p>
+                    <a class="conference-link" href="https://pfia2025.u-bourgogne.fr/conferences/apia/" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Voir la conférence
+                    </a>
+                </div>
+
+                <div class="conference-card">
+                    <span class="conference-year">2026</span>
+                    <h4>Application Pratique de l’IA (APIA)</h4>
+                    <p class="conference-location">Arras, France</p>
+                    <a class="conference-link" href="https://pfia26.cril.fr/conf%C3%A9rences/apia/" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Voir la conférence
+                    </a>
+                </div>
             </div>
         </div>
 
